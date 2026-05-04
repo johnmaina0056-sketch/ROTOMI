@@ -721,6 +721,54 @@ alert("Please select at least one tank size");
 return;
 }
 
+let message = `NEW ORDER%0A
+Tank(s): ${selected}%0A
+Quantity: ${document.getElementById("qty").value}%0A
+Color: ${document.getElementById("color").value}%0A
+Name: ${document.getElementById("name").value}%0A
+Phone: ${document.getElementById("phone").value}%0A
+Email: ${document.getElementById("email").value}%0A
+Address: ${document.getElementById("address").value}%0A
+Delivery: ${document.getElementById("delivery").value}%0A
+Payment: ${document.getElementById("payment").value}%0A
+Installation: ${document.getElementById("install").value}%0A
+Tap: ${document.getElementById("tap").value}`;
+
+window.open(https://wa.me/254733355444?text=${message}, "_blank");
+});
+</script>
+ // toggle dropdown
+document.getElementById("dropdownBox").onclick = function(){
+let list = document.getElementById("dropdownList");
+list.style.display = list.style.display === "none" ? "block" : "none";
+};
+
+// update selected text
+let checkboxes = document.querySelectorAll("#dropdownList input");
+checkboxes.forEach(cb => {
+cb.addEventListener("change", () => {
+let selected = Array.from(checkboxes)
+.filter(c => c.checked)
+.map(c => c.parentElement.textContent.trim());
+
+document.getElementById("selectedText").innerText =
+selected.length ? selected.join(", ") : "Select Tank Size(s)";
+});
+});
+
+// submit
+document.getElementById("orderForm").addEventListener("submit", function(e){
+e.preventDefault();
+
+let selected = Array.from(document.querySelectorAll("#dropdownList input:checked"))
+.map(c => c.parentElement.textContent.trim())
+.join(", ");
+
+if(!selected){
+alert("Please select at least one tank size");
+return;
+}
+
 let message = `*NEW ORDER*%0A
 Tank(s): ${selected}%0A
 Quantity: ${document.getElementById("qty").value}%0A
